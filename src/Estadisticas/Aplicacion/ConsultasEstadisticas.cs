@@ -6,16 +6,19 @@ using Equipos.Aplicacion;
 
 namespace Estadisticas.Aplicacion
 {
+    // Servicio de aplicación que expone todas las consultas de estadísticas del torneo usando LINQ
     public class ConsultasEstadisticas
     {
+        // Repositorio desde donde leo todos los equipos y sus estadísticas
         private readonly IEquipoRepositorio _repoEquipos;
 
+        // En el constructor recibo el repositorio de equipos
         public ConsultasEstadisticas(IEquipoRepositorio repoEquipos)
         {
             _repoEquipos = repoEquipos;
         }
 
-        // 1. Líder del torneo
+        // 1. Devuelve el líder del torneo según puntos, DG, GF y nombre
         public Equipo? ObtenerLider()
         {
             var equipos = _repoEquipos.ObtenerTodos();
@@ -31,7 +34,7 @@ namespace Estadisticas.Aplicacion
                 .FirstOrDefault();
         }
 
-        // 2. Equipos invictos (PJ > 0 y sin derrotas)
+        // 2. Equipos invictos: han jugado al menos un partido y no tienen derrotas
         public IEnumerable<Equipo> ObtenerEquiposInvictos()
         {
             var equipos = _repoEquipos.ObtenerTodos();
@@ -44,7 +47,7 @@ namespace Estadisticas.Aplicacion
                 .ThenBy(e => e.Nombre);
         }
 
-        // 3. Top 3 según tabla
+        // 3. Top 3 de la tabla de posiciones, usando el mismo criterio de orden
         public IEnumerable<Equipo> ObtenerTop3()
         {
             var equipos = _repoEquipos.ObtenerTodos();
@@ -57,7 +60,7 @@ namespace Estadisticas.Aplicacion
                 .Take(3);
         }
 
-        // 4. Equipos con más goles a favor
+        // 4. Equipos con más goles a favor (pueden ser varios empatados en el máximo)
         public IEnumerable<Equipo> ObtenerEquiposConMasGolesAFavor()
         {
             var equipos = _repoEquipos.ObtenerTodos();
@@ -72,7 +75,7 @@ namespace Estadisticas.Aplicacion
                 .OrderBy(e => e.Nombre);
         }
 
-        // 5. Equipos con menos goles en contra
+        // 5. Equipos con menos goles en contra (mejor defensa)
         public IEnumerable<Equipo> ObtenerEquiposConMenosGolesEnContra()
         {
             var equipos = _repoEquipos.ObtenerTodos();
@@ -80,9 +83,8 @@ namespace Estadisticas.Aplicacion
             if (equipos.Count == 0)
                 return Enumerable.Empty<Equipo>();
 
-            var minGolesContra = equipos.Max(e => e.Estadisticas.GolesEnContra);
-            // ojo: si quieres el mínimo real usa Min:
-            minGolesContra = equipos.Min(e => e.Estadisticas.GolesEnContra);
+            // Obtengo el valor mínimo de GC
+            var minGolesContra = equipos.Min(e => e.Estadisticas.GolesEnContra);
 
             return equipos
                 .Where(e => e.Estadisticas.GolesEnContra == minGolesContra)
@@ -134,7 +136,7 @@ namespace Estadisticas.Aplicacion
                 .OrderBy(e => e.Nombre);
         }
 
-        // 9. Equipos sin victorias
+        // 9. Equipos que no han ganado ningún partido, pero sí han jugado
         public IEnumerable<Equipo> ObtenerEquiposSinVictorias()
         {
             var equipos = _repoEquipos.ObtenerTodos();
@@ -157,7 +159,7 @@ namespace Estadisticas.Aplicacion
                 .ThenBy(e => e.Nombre);
         }
 
-        // 11. Equipos con puntos >= minPuntos
+        // 11. Equipos con puntos mayores o iguales a un mínimo dado
         public IEnumerable<Equipo> ObtenerEquiposConPuntosMayoresOIgualesA(int minPuntos)
         {
             var equipos = _repoEquipos.ObtenerTodos();
@@ -168,7 +170,7 @@ namespace Estadisticas.Aplicacion
                 .ThenBy(e => e.Nombre);
         }
 
-        // 12. Buscar equipo por nombre
+        // 12. Buscar un equipo por nombre usando el repositorio
         public Equipo? BuscarEquipoPorNombre(string nombre)
         {
             if (string.IsNullOrWhiteSpace(nombre))
@@ -177,7 +179,7 @@ namespace Estadisticas.Aplicacion
             return _repoEquipos.ObtenerPorNombre(nombre);
         }
 
-        // 13. Promedio de goles a favor
+        // 13. Promedio de goles a favor por equipo
         public double ObtenerPromedioGolesAFavor()
         {
             var equipos = _repoEquipos.ObtenerTodos();
@@ -188,7 +190,7 @@ namespace Estadisticas.Aplicacion
             return equipos.Average(e => e.Estadisticas.GolesAFavor);
         }
 
-        // 14. Promedio de goles en contra
+        // 14. Promedio de goles en contra por equipo
         public double ObtenerPromedioGolesEnContra()
         {
             var equipos = _repoEquipos.ObtenerTodos();
@@ -199,7 +201,7 @@ namespace Estadisticas.Aplicacion
             return equipos.Average(e => e.Estadisticas.GolesEnContra);
         }
 
-        // 15. Total de goles marcados en el torneo
+        // 15. Total de goles marcados en el torneo (suma de todos los GF)
         public int ObtenerTotalGolesMarcados()
         {
             var equipos = _repoEquipos.ObtenerTodos();
@@ -213,7 +215,7 @@ namespace Estadisticas.Aplicacion
             return equipos.Sum(e => e.Estadisticas.Puntos);
         }
 
-        // 17. Equipos por debajo del promedio de puntos
+        // 17. Equipos que están por debajo del promedio de puntos del torneo
         public IEnumerable<Equipo> ObtenerEquiposPorDebajoDelPromedioPuntos()
         {
             var equipos = _repoEquipos.ObtenerTodos();
