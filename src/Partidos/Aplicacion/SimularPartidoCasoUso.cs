@@ -1,0 +1,34 @@
+using Equipos.Aplicacion;
+using Equipos.Dominio;
+using Partidos.Dominio;
+
+namespace Partidos.Aplicacion
+{
+    public class SimularPartidoCasoUso
+    {
+        private readonly IEquipoRepositorio _repoEquipos;
+
+        public SimularPartidoCasoUso(IEquipoRepositorio repoEquipos)
+        {
+            _repoEquipos = repoEquipos;
+        }
+
+        public void Ejecutar(string nombreLocal, string nombreVisitante, int golesLocal, int golesVisitante)
+        {
+            if (string.IsNullOrWhiteSpace(nombreLocal) ||
+                string.IsNullOrWhiteSpace(nombreVisitante))
+                throw new ArgumentException("Los nombres de los equipos no pueden estar vacíos.");
+
+            var local = _repoEquipos.ObtenerPorNombre(nombreLocal);
+            if (local is null)
+                throw new InvalidOperationException($"No existe el equipo local '{nombreLocal}'.");
+
+            var visitante = _repoEquipos.ObtenerPorNombre(nombreVisitante);
+            if (visitante is null)
+                throw new InvalidOperationException($"No existe el equipo visitante '{nombreVisitante}'.");
+
+            var partido = new Partido(local, visitante, golesLocal, golesVisitante);
+            partido.AplicarResultado();
+        }
+    }
+}
