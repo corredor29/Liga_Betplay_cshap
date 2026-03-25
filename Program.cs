@@ -3,6 +3,7 @@ using Equipos.Aplicacion;
 using Equipos.Infraestructura;
 using Estadisticas.Aplicacion;
 using Partidos.Aplicacion;
+using ConsolaUI.Menus;
 
 internal class Program
 {
@@ -13,6 +14,7 @@ internal class Program
         var listarEquipos = new ListarEquiposCasoUno(repoEquipos);
         var simularPartido = new SimularPartidoCasoUso(repoEquipos);
         var consultas = new ConsultasEstadisticas(repoEquipos);
+        var menuEstadisticas = new MenuEstadisticas(consultas);
 
         while (true)
         {
@@ -28,7 +30,7 @@ internal class Program
             Console.WriteLine("1. Registrar equipo");
             Console.WriteLine("2. Listar equipos");
             Console.WriteLine("3. Simular partido");
-            Console.WriteLine("4. Ver líder del torneo");
+            Console.WriteLine("4. Estadísticas del torneo");
             Console.WriteLine("5. Salir");
             Console.Write("Opción: ");
 
@@ -46,7 +48,7 @@ internal class Program
                     SimularPartido(simularPartido);
                     break;
                 case "4":
-                    VerLider(consultas);
+                    menuEstadisticas.Mostrar();
                     break;
                 case "5":
                     return;
@@ -134,31 +136,7 @@ internal class Program
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Error: {ex.Message}");
-        }
-
-        Console.WriteLine("Presiona una tecla para continuar...");
-        Console.ReadKey();
-    }
-
-    private static void VerLider(ConsultasEstadisticas consultas)
-    {
-        Console.Clear();
-        Console.WriteLine("=== Líder del torneo ===");
-
-        var lider = consultas.ObtenerLider();
-
-        if (lider is null)
-        {
-            Console.WriteLine("No hay equipos registrados.");
-        }
-        else
-        {
-            var s = lider.Estadisticas;
-            Console.WriteLine($"Equipo: {lider.Nombre}");
-            Console.WriteLine($"PJ: {s.PartidosJugados}  PG: {s.PartidosGanados}  PE: {s.PartidosEmpatados}  PP: {s.PartidosPerdidos}");
-            Console.WriteLine($"GF: {s.GolesAFavor}  GC: {s.GolesEnContra}  DG: {s.DiferenciaGoles}");
-            Console.WriteLine($"Puntos: {s.Puntos}");
+            Console.WriteLine($"Error al simular partido: {ex.Message}");
         }
 
         Console.WriteLine("Presiona una tecla para continuar...");

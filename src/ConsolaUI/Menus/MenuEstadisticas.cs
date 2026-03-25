@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Estadisticas.Aplicacion;
 
 namespace ConsolaUI.Menus
@@ -97,42 +98,146 @@ namespace ConsolaUI.Menus
         private void MostrarInvictos()
         {
             Console.Clear();
-            Console.WriteLine("Equipos invictos (pendiente de implementar consultas).");
+            Console.WriteLine("=== Equipos invictos ===");
+
+            var invictos = _consultas.ObtenerEquiposInvictos().ToList();
+
+            if (invictos.Count == 0)
+            {
+                Console.WriteLine("No hay equipos invictos.");
+            }
+            else
+            {
+                foreach (var e in invictos)
+                {
+                    var s = e.Estadisticas;
+                    Console.WriteLine($"{e.Nombre} - PJ:{s.PartidosJugados} PG:{s.PartidosGanados} PE:{s.PartidosEmpatados} PP:{s.PartidosPerdidos} Pts:{s.Puntos}");
+                }
+            }
+
+            Console.WriteLine("Presiona una tecla para continuar...");
             Console.ReadKey();
         }
 
         private void MostrarTop3()
         {
             Console.Clear();
-            Console.WriteLine("Top 3 (pendiente de implementar consultas).");
+            Console.WriteLine("=== Top 3 equipos ===");
+
+            var top3 = _consultas.ObtenerTop3().ToList();
+
+            if (top3.Count == 0)
+            {
+                Console.WriteLine("No hay equipos suficientes.");
+            }
+            else
+            {
+                var pos = 1;
+                foreach (var e in top3)
+                {
+                    var s = e.Estadisticas;
+                    Console.WriteLine($"{pos}. {e.Nombre} - Pts:{s.Puntos} DG:{s.DiferenciaGoles} GF:{s.GolesAFavor} PJ:{s.PartidosJugados}");
+                    pos++;
+                }
+            }
+
+            Console.WriteLine("Presiona una tecla para continuar...");
             Console.ReadKey();
         }
 
         private void MostrarMasGolesAFavor()
         {
             Console.Clear();
-            Console.WriteLine("Equipos con más goles a favor (pendiente).");
+            Console.WriteLine("=== Equipos con más goles a favor ===");
+
+            var equipos = _consultas.ObtenerEquiposConMasGolesAFavor().ToList();
+
+            if (equipos.Count == 0)
+            {
+                Console.WriteLine("No hay equipos registrados.");
+            }
+            else
+            {
+                foreach (var e in equipos)
+                {
+                    var s = e.Estadisticas;
+                    Console.WriteLine($"{e.Nombre} - GF:{s.GolesAFavor} PJ:{s.PartidosJugados} Pts:{s.Puntos}");
+                }
+            }
+
+            Console.WriteLine("Presiona una tecla para continuar...");
             Console.ReadKey();
         }
 
         private void MostrarMenosGolesEnContra()
         {
             Console.Clear();
-            Console.WriteLine("Equipos con menos goles en contra (pendiente).");
+            Console.WriteLine("=== Equipos con menos goles en contra ===");
+
+            var equipos = _consultas.ObtenerEquiposConMenosGolesEnContra().ToList();
+
+            if (equipos.Count == 0)
+            {
+                Console.WriteLine("No hay equipos registrados.");
+            }
+            else
+            {
+                foreach (var e in equipos)
+                {
+                    var s = e.Estadisticas;
+                    Console.WriteLine($"{e.Nombre} - GC:{s.GolesEnContra} PJ:{s.PartidosJugados} Pts:{s.Puntos}");
+                }
+            }
+
+            Console.WriteLine("Presiona una tecla para continuar...");
             Console.ReadKey();
         }
 
         private void MostrarDiferenciaGolPositiva()
         {
             Console.Clear();
-            Console.WriteLine("Equipos con diferencia de gol positiva (pendiente).");
+            Console.WriteLine("=== Equipos con diferencia de gol positiva ===");
+
+            var equipos = _consultas.ObtenerEquiposConDiferenciaGolPositiva().ToList();
+
+            if (equipos.Count == 0)
+            {
+                Console.WriteLine("No hay equipos con diferencia de gol positiva.");
+            }
+            else
+            {
+                foreach (var e in equipos)
+                {
+                    var s = e.Estadisticas;
+                    Console.WriteLine($"{e.Nombre} - DG:{s.DiferenciaGoles} GF:{s.GolesAFavor} GC:{s.GolesEnContra} Pts:{s.Puntos}");
+                }
+            }
+
+            Console.WriteLine("Presiona una tecla para continuar...");
             Console.ReadKey();
         }
 
         private void MostrarPorDebajoPromedioPuntos()
         {
             Console.Clear();
-            Console.WriteLine("Equipos por debajo del promedio de puntos (pendiente).");
+            Console.WriteLine("=== Equipos por debajo del promedio de puntos ===");
+
+            var equipos = _consultas.ObtenerEquiposPorDebajoDelPromedioPuntos().ToList();
+
+            if (equipos.Count == 0)
+            {
+                Console.WriteLine("No hay equipos por debajo del promedio (o no hay equipos).");
+            }
+            else
+            {
+                foreach (var e in equipos)
+                {
+                    var s = e.Estadisticas;
+                    Console.WriteLine($"{e.Nombre} - Pts:{s.Puntos} PJ:{s.PartidosJugados}");
+                }
+            }
+
+            Console.WriteLine("Presiona una tecla para continuar...");
             Console.ReadKey();
         }
     }
