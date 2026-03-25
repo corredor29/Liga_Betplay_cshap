@@ -1,4 +1,6 @@
 using System;
+using Estadisticas.Aplicacion;
+
 
 namespace ConsolaUI.Menus
 {
