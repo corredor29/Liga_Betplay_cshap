@@ -1,0 +1,8 @@
+# Ignorar carpetas de compilación (binarios)
+bin/
+obj/
+
+# Ignorar archivos de usuario de Visual Studio
+.vs/
+
+
