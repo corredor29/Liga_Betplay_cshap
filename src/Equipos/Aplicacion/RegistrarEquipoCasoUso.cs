@@ -1,4 +1,4 @@
-using Equipos.dominio;
+using Equipos.Dominio;
 
 namespace Equipos.Aplicacion
 {

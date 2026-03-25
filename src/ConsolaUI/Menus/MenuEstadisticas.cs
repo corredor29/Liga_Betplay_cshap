@@ -1,7 +1,6 @@
 using System;
 using Estadisticas.Aplicacion;
 
-
 namespace ConsolaUI.Menus
 {
     public class MenuEstadisticas
@@ -73,7 +72,25 @@ namespace ConsolaUI.Menus
         private void MostrarLider()
         {
             Console.Clear();
-            Console.WriteLine("Líder del torneo (pendiente de implementar consultas).");
+            Console.WriteLine("=== Líder del torneo ===");
+
+            var lider = _consultas.ObtenerLider();
+
+            if (lider is null)
+            {
+                Console.WriteLine("No hay equipos registrados todavía.");
+            }
+            else
+            {
+                var s = lider.Estadisticas;
+                Console.WriteLine($"Equipo: {lider.Nombre}");
+                Console.WriteLine($"PJ: {s.PartidosJugados}  PG: {s.PartidosGanados}  PE: {s.PartidosEmpatados}  PP: {s.PartidosPerdidos}");
+                Console.WriteLine($"GF: {s.GolesAFavor}  GC: {s.GolesEnContra}  DG: {s.DiferenciaGoles}");
+                Console.WriteLine($"Puntos: {s.Puntos}");
+            }
+
+            Console.WriteLine();
+            Console.WriteLine("Presiona una tecla para continuar...");
             Console.ReadKey();
         }
 

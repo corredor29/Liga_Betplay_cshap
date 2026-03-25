@@ -19,6 +19,12 @@ namespace Partidos.Aplicacion
                 string.IsNullOrWhiteSpace(nombreVisitante))
                 throw new ArgumentException("Los nombres de los equipos no pueden estar vacíos.");
 
+            if (nombreLocal.Trim().Equals(nombreVisitante.Trim(), StringComparison.OrdinalIgnoreCase))
+                throw new ArgumentException("Un equipo no puede jugar contra sí mismo.");
+
+            if (golesLocal < 0 || golesVisitante < 0)
+                throw new ArgumentException("Los goles no pueden ser negativos.");
+
             var local = _repoEquipos.ObtenerPorNombre(nombreLocal);
             if (local is null)
                 throw new InvalidOperationException($"No existe el equipo local '{nombreLocal}'.");
@@ -32,3 +38,4 @@ namespace Partidos.Aplicacion
         }
     }
 }
+
