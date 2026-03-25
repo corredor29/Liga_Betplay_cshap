@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using Equipos.Dominio;
+using Equipos.dominio;
 
-namespace LigaBetPlay.src.Equipos.Aplicacion
+namespace Equipos.Aplicacion
 {
     public interface IEquipoRepositorio
     {

@@ -1,4 +1,4 @@
-namespace Equipos.Dominio
+namespace Equipos.dominio
 {
     public class Equipo
     {

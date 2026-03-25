@@ -1,18 +1,18 @@
 using System.Collections.Generic;
-using Equipos.Dominio;
+using Equipos.dominio;
 
-namespace LigaBetPlay.src.Equipos.Aplicacion
+namespace Equipos.Aplicacion
 {
     public class ListarEquiposCasoUno
     {
-        private readonly IEquipoRepositorio _repo;
-        public ListarEquiposCasoUno(IEquipoRepositorio Repo)
+        private readonly IEquipoRepositorio _repoEquipos;
+        public ListarEquiposCasoUno(IEquipoRepositorio repoEquipo)
         {
-            _repo = Repo;
+            _repoEquipos = repoEquipo;
         }
         public IReadOnlyCollection<Equipo> Ejecutar()
         {
-            return _repo.ObtenerTodos();
+            return  _repoEquipos.ObtenerTodos();
         }
     }
 }

@@ -1,25 +1,25 @@
-using Equipos.Dominio;
+using Equipos.dominio;
 
-namespace LigaBetPlay.src.Equipos.Aplicacion
+namespace Equipos.Aplicacion
 {
     public class RegistrarEquipoCasoUso
     {
-        private readonly IEquipoRepositorio _repo;
+        private readonly IEquipoRepositorio _repoEquipos;
 
-        public RegistrarEquipoCasoUso (IEquipoRepositorio Repo)
+        public RegistrarEquipoCasoUso (IEquipoRepositorio repoEquipos)
         {
-            _repo= Repo;
+            _repoEquipos = repoEquipos;
         }
         public void Ejecutar(string Nombre)
         {
-            var EquipoExistente = _repo.ObtenerPorNombre(Nombre);
+            var EquipoExistente = _repoEquipos.ObtenerPorNombre(Nombre);
 
             if (EquipoExistente != null)
             {
                 throw new Exception("El equipo ya existe");
             }
             var NuevoEquipo = new Equipo(Nombre);
-            _repo.Agregar(NuevoEquipo);
+            _repoEquipos.Agregar(NuevoEquipo);
         }
     }
 }
