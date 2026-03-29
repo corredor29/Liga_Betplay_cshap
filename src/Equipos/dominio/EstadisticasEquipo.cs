@@ -57,6 +57,7 @@ namespace Equipos.Dominio
                 PartidosPerdidos++;
             }
         }
+        // Método para restaurar el estado de las estadísticas desde datos externos (por ejemplo, desde un JSON)
         public void Restaurar(
             int partidosJugados,
             int partidosGanados,
@@ -67,9 +68,11 @@ namespace Equipos.Dominio
             int puntos
         )
         {
+            // Validación: ningún valor puede ser negativo
             if (partidosJugados < 0 || partidosGanados < 0 || partidosEmpatados < 0 || partidosPerdidos < 0 || golesAFavor < 0 || golesEnContra < 0 || puntos < 0)
                 throw new ArgumentException("Los valores no pueden ser negativos.");
 
+            // Asignación de los valores recibidos a las propiedades de la clase
             PartidosJugados = partidosJugados;
             PartidosGanados = partidosGanados;
             PartidosEmpatados = partidosEmpatados;
