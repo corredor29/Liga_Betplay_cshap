@@ -37,5 +37,27 @@ namespace Equipos.Dominio
             } 
 
         }
+        public void Restaurar(
+            int partidosJugados,
+            int partidosGanados,
+            int partidosEmpatados,
+            int partidosPerdidos,
+            int golesAFavor,
+            int golesEnContra,
+            int puntos
+        )
+        {
+            if (partidosJugados < 0 || partidosGanados < 0 || partidosEmpatados < 0 || partidosPerdidos < 0 || golesAFavor < 0 || golesEnContra < 0 || puntos < 0)
+                throw new ArgumentException("Los valores no pueden ser negativos.");
+
+            PartidosJugados = partidosJugados;
+            PartidosGanados = partidosGanados;
+            PartidosEmpatados = partidosEmpatados;
+            PartidosPerdidos = partidosPerdidos;
+            GolesAFavor = golesAFavor;
+            GolesEnContra = golesEnContra;
+            Puntos = puntos;
+        }
+    
     }
 }

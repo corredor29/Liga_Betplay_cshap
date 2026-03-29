@@ -8,19 +8,19 @@
     "net10.0": []
   },
   "packageFolders": {
-    "/Users/wen/.nuget/packages/": {}
+    "C:\\Users\\corre\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/wen/Desktop/Liga_Betplay_cshap/LigaBetPlay.csproj",
+      "projectUniqueName": "D:\\Documentos\\LigaBetPlay\\LigaBetPlay.csproj",
       "projectName": "LigaBetPlay",
-      "projectPath": "/Users/wen/Desktop/Liga_Betplay_cshap/LigaBetPlay.csproj",
-      "packagesPath": "/Users/wen/.nuget/packages/",
-      "outputPath": "/Users/wen/Desktop/Liga_Betplay_cshap/obj/",
+      "projectPath": "D:\\Documentos\\LigaBetPlay\\LigaBetPlay.csproj",
+      "packagesPath": "C:\\Users\\corre\\.nuget\\packages\\",
+      "outputPath": "D:\\Documentos\\LigaBetPlay\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/wen/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\corre\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net10.0"
@@ -65,7 +65,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/10.0.201/PortableRuntimeIdentifierGraph.json",
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.201/PortableRuntimeIdentifierGraph.json",
         "packagesToPrune": {
           "Microsoft.CSharp": "(,4.7.32767]",
           "Microsoft.VisualBasic": "(,10.4.32767]",
