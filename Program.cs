@@ -12,7 +12,7 @@ internal class Program
     {
         // ================== Infraestructura ==================
         // Repositorio en memoria donde se guardan todos los equipos
-        var repoEquipos = new RepositorioEquiposMemoria();
+        var repoEquipos = new RepositorioEquiposJson("equipos.json");
 
         // ================== Casos de uso ==================
         // Caso de uso para registrar nuevos equipos

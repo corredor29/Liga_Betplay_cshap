@@ -1,0 +1,22 @@
+[
+  {
+    "Nombre": "wen",
+    "PartidosJugados": 0,
+    "PartidosGanados": 0,
+    "PartidosEmpatados": 0,
+    "PartidosPerdidos": 0,
+    "GolesAFavor": 0,
+    "GolesEnContra": 0,
+    "Puntos": 0
+  },
+  {
+    "Nombre": "pipe",
+    "PartidosJugados": 0,
+    "PartidosGanados": 0,
+    "PartidosEmpatados": 0,
+    "PartidosPerdidos": 0,
+    "GolesAFavor": 0,
+    "GolesEnContra": 0,
+    "Puntos": 0
+  }
+]

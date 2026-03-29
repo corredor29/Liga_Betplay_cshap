@@ -1,6 +1,6 @@
 using System;
 
-namespace LigaBetPlay.src.Equipos.Infraestructura;
+namespace Equipos.Infraestructura;
 
 public class EquipoDto
 {
